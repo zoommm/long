@@ -5,13 +5,14 @@ struct node
 {
     int number;
 
-    int name[20];
+    char name[20];
 //在结构体中定义自己得指针；
     struct node *next;
 
 };
 typedef struct node V_NODE;
 void print_link(V_NODE *p);
+V_NODE *link_add(V_NODE *head);
 
 V_NODE *create_link (int n);
 int main(int argc, const char *argv[])
@@ -21,6 +22,8 @@ int main(int argc, const char *argv[])
     printf("input a number:\n");
     scanf("%d",&n);
     head = create_link(n);
+    print_link(head);
+    head = link_add(head);
     print_link(head);
     return 0;
 }
@@ -41,7 +44,7 @@ V_NODE *create_link(int n)
 
     }
 
-    p->number =1;
+    p->number =0;
     strcpy( p->name,"sao");
     p->next =NULL;
     for (i = 0; i < n; i++) 
@@ -71,4 +74,41 @@ void print_link(V_NODE *p)
     
          printf("\n");
     }
+}
+V_NODE *link_add(V_NODE *head)
+{
+    V_NODE *p = NULL;
+    V_NODE *ptr =head;
+    p = malloc(sizeof(V_NODE));
+    if (p==NULL) 
+    {
+        perror("malloc");
+        exit(0);
+    }
+    
+    printf("input a number:");
+    scanf("%d",&p->number);
+    printf("input a name:");
+    scanf("%s",p->name);
+    p->next = NULL;
+    if (ptr==NULL) 
+    {
+        return p;
+    }
+    if (p->number<=ptr->number) 
+    {
+        p->next=ptr;
+        head=p;
+        return head;
+    }
+    while((ptr->next!=NULL)&&(p->number>ptr->next->number))
+    {
+    ptr = ptr->next;
+     
+    } 
+    p->next=ptr->next;
+    ptr->next=p;
+    
+    return head;
+
 }
