@@ -13,6 +13,7 @@ struct node
 typedef struct node V_NODE;
 void print_link(V_NODE *p);
 V_NODE *link_add(V_NODE *head);
+V_NODE *delete_link(V_NODE *head);
 
 V_NODE *create_link (int n);
 int main(int argc, const char *argv[])
@@ -24,6 +25,8 @@ int main(int argc, const char *argv[])
     head = create_link(n);
     print_link(head);
     head = link_add(head);
+    print_link(head);
+    head =delete_link(head);
     print_link(head);
     return 0;
 }
@@ -75,6 +78,7 @@ void print_link(V_NODE *p)
          printf("\n");
     }
 }
+////链表得添加
 V_NODE *link_add(V_NODE *head)
 {
     V_NODE *p = NULL;
@@ -112,3 +116,48 @@ V_NODE *link_add(V_NODE *head)
     return head;
 
 }
+//链表得删除；
+V_NODE *delete_link(V_NODE *head)
+{
+//判断有没有要找得链表。
+   int num=0;
+   V_NODE *p=head;
+   V_NODE *ptr;
+//head就一个所以要新定一个指针来释放。
+   if (head==NULL) 
+   {
+       printf("empty link !\n");
+       return NULL;
+   }
+   printf("PLease input number of node to delete:\n");
+   scanf("%d",&num);
+//要释放空间了，要free得函数。用man free，没有得话，man 2 free  或者 man 3
+//free。
+   if (num==head->number) 
+   {
+       head=head->next;
+       free(p);
+       return head;
+   }
+//查找地方
+   while((p->next!=NULL)&&(p->next->number!=num))
+    {
+        p=p->next;      
+    }
+//时刻注意你得==号还是=号，否者容易出错，已经是2回了
+    if (p->next==NULL) 
+    {
+        printf("No number match!\n");
+    }
+//删除操作  还需要用ptr得指针来释放链表丢下得
+
+    else
+    {
+        ptr =p->next;
+        p->next=p->next->next;
+        free(ptr);
+    }
+
+   return head;
+}
+
