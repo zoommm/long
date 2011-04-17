@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-#define N 30
+#define N 100
 int print_a(int *p);
 int  init_a(int *p) ;
 void sort_a(int *p);
@@ -20,11 +20,18 @@ int main(int argc, const char *argv[])
 int print_a(int *p)
 {   
     int i=0;
+    int j=0;
     for (i = 0; i < N; i++) 
     {
         if (p[i]>0) 
         {
+        j++;
+
         printf("%5d",p[i]);
+        if (j%10==0) 
+        {
+            printf("\n");
+        }
         }
     }
       printf("\n");
