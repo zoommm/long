@@ -14,22 +14,48 @@ typedef struct node V_NODE;
 void print_link(V_NODE *p);
 V_NODE *link_add(V_NODE *head);
 V_NODE *delete_link(V_NODE *head);
-
+void print_list(void);
+int get_choice(void);
 V_NODE *create_link (int n);
 int main(int argc, const char *argv[])
 {
     V_NODE *head=NULL;
-    int n=0;
-    printf("input a number:\n");
-    scanf("%d",&n);
-    head = create_link(n);
-    print_link(head);
-    head = link_add(head);
-    print_link(head);
-    head =delete_link(head);
-    print_link(head);
+    char flag=0;
+    while(!flag)
+    {
+
+        print_list();
+        switch(get_choice())
+        {
+            case 1 : head= link_add(head);break;
+            case 2 : head= delete_link(head); break;
+            case 3 : print_link(head);break;
+            case 4 : flag=1; break;
+            default : break;
+        }
+        getchar();
+        getchar();
+    }
     return 0;
 }
+void print_list(void)
+{
+    printf("Please make  a choice:\n");
+    printf("1.ADD node\n");
+    printf("2.delete node\n");
+    printf("3.print link\n");
+    printf("4.exit\n");
+}
+int  get_choice(void)
+{
+    char choice[20];
+    scanf("%s",&choice);
+    return atoi(choice);
+}
+
+
+
+
 V_NODE *create_link(int n)
 {
 //在建立链表得时候首地址，一般都不能动，否则地址得内容会丢失了；
@@ -39,7 +65,7 @@ V_NODE *create_link(int n)
  //malloc是给程序员设计得堆空间，这个空间不是因为函数结束而结束，而是进程结束或者
  //free掉这个空间。才能释放掉这个空间。
     p = head = malloc (sizeof(V_NODE));
- :   if (p==NULL) 
+    if (p==NULL) 
     {
   //perror();一般是打印错误信息得函数，它会打印出哪得信息出现错误，但是你给它一个参。
         perror("malloc");
@@ -69,13 +95,21 @@ V_NODE *create_link(int n)
 ////打印得函数
 ////
 void print_link(V_NODE *p)
-{
+{   
+    printf("\n");
+    printf("student formation:\n");
+    printf("number\tname\n");
+    if (p==NULL) 
+    {
+        printf("no char node\n");
+    }
+
     while(p!=NULL)
     {
          printf("%d\t%s\n",p->number,p->name);
          p = p->next;
     
-         printf("\n");
+         
     }
 }
 ////链表得添加
