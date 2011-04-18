@@ -9,11 +9,11 @@ int main(int argc, const char *argv[])
 {   
     int a[N];
     init_a(a);
-    printf("priginal:\n");
+    printf("priginal is :\n");
     print_a(a);
 
     sort_a(a);
-    printf("sort:\n");
+    printf("sort is :\n");
     print_a(a);
     return 0;
 }
