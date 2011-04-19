@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include<stdlib.h>
 struct node
 {
     int number;
@@ -7,15 +7,15 @@ struct node
 };
 typedef struct node V_NODE;
 
+V_NODE *init_link(int n );
 void print_link(V_NODE *p,int n);
-V_NODE *init_link(int n);
 void game_doing(V_NODE *follow);
 int main(int argc, const char *argv[])
-{   
-    V_NODE *head =NULL;
-    V_NODE *rear =NULL;
+{
+    V_NODE *head=NULL;
+    V_NODE *rear=NULL;
     int n;
-    printf("Please input a number:\n");
+    printf("Please input a number :\n");
     scanf("%d",&n);
     rear=init_link(n);
     head=rear->next;
@@ -25,14 +25,14 @@ int main(int argc, const char *argv[])
     printf("\n");
     return 0;
 }
-V_NODE *init_link(int n)
-{   
+V_NODE *init_link(int n )
+{
     int i=0;
     V_NODE *head=NULL;
     V_NODE *p=NULL;
     if (n<=0) 
     {
-        return NULL;
+        return NULL;    
     }
     head=p=malloc(sizeof(V_NODE));
     if (p==NULL) 
@@ -40,10 +40,10 @@ V_NODE *init_link(int n)
         perror("malloc");
         exit(0);
         return 0;
-     }
+    }
     p->number=1;
     p->next=NULL;
-    for (i = 1; i < n; i++) 
+    for (i =1 ; i < n; i++) 
     {
         p->next=malloc(sizeof(V_NODE));
         if (p->next==NULL) 
@@ -55,18 +55,18 @@ V_NODE *init_link(int n)
         p->next->next=NULL;
         p=p->next;
     }
-    p->next = head;
+    p->next=head;
     return p;
 }
-void print_link(V_NODE *p, int n)
+void print_link(V_NODE *p,int n)
 {
     int i=0;
     for (i = 0; i < n; i++) 
     {
         printf("%5d",p->number);
-        if(((i+1)%5)==0) 
+        if (((i+1)%5)==0) 
         {
-            printf("\n");
+           printf("\n");
         }
         p=p->next;
     }
@@ -79,7 +79,7 @@ void game_doing(V_NODE *follow)
     int counter=0;
     printf("input the interval:\n");
     scanf("%d",&interval);
-    while(follow != follow->next)
+    while(follow!=follow->next)
     {
         counter++;
         if (counter==interval) 
@@ -88,8 +88,8 @@ void game_doing(V_NODE *follow)
             printf("%5d(out)\n",p->number);
             follow->next=p->next;
             free(p);
-            p = follow->next;
-            
+            p=follow->next;
+
         }
         else
         {
@@ -98,5 +98,5 @@ void game_doing(V_NODE *follow)
             follow=follow->next;
         }
     }
-    printf("%5d left!",follow->number);
+    printf("%5d\tleft!",follow->number);
 }
