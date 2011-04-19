@@ -2,12 +2,17 @@
 #include<stdlib.h>
 int main(int argc, const char *argv[])
 {
-    int b=1;
-    char *ptr="this";
-    char **p=ptr;
-    char *nptr;
-    int atoi(const char *nptr);
-    strtol(ptr,(char **)NULL,10);
-    printf("\n",strtol);
+    char str[100];
+    int number=0;
+    int base=0;
+    char *p;
+   // int atoi(const char *nptr);
+    printf("input the number:\n");
+    scanf("%s",str);
+    printf("input the base:\n");
+    scanf("%d",&base);
+    number=strtol(str,&p,base);
+    printf("decimal number :%d\n",number);
+
     return 0;
 }
