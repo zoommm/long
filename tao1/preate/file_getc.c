@@ -6,13 +6,10 @@ int main(int argc, const char *argv[])
     FILE *fp;
     char ch;
     int i=0;
-    char str[100]="hello world!!!!\nthis is C world\n";
+    char str[100]="hello world!EOF!!!\nthis is C world\n";
     char str_1[100]="hkjahkjhk";
-    
+    str[6]='EOF';    
     int r_number=20;
-    str[4]=4;
-    str[6]=0;
-    str[7]=0;
     
     //gets(str_1);
     //printf("\r%s\n",str_1);
