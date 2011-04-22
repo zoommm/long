@@ -23,6 +23,7 @@ int main(int argc, const char *argv[])
 {
     V_NODE *head=NULL;
     char flag=0;
+    head = load_link();
     while(!flag)
     {
 
@@ -31,12 +32,11 @@ int main(int argc, const char *argv[])
         {
             case 1 : head= link_add(head);break;
             case 2 : head= delete_link(head); break;
-            case 3 : load_link(head);break;
+            case 3 : print_link(head);break;
             case 4 : save_link(head); break;
             case 5 : flag=1; break;
             default : break;
         }
-        getchar();
         getchar();
     }
     return 0;
@@ -46,14 +46,14 @@ void print_list(void)
     printf("Please make  a choice:\n");
     printf("1.ADD node\n");
     printf("2.delete node\n");
-    printf("3.print link\n");
+    printf("3.pring_link\n");
     printf("4.save_link \n");
     printf("5.exit\n");
 }
 int  get_choice(void)
 {
     char choice[20];
-    scanf("%s",&choice);
+    scanf("%s",choice);
     return atoi(choice);
 }
 
@@ -112,8 +112,6 @@ void print_link(V_NODE *p)
     {
          printf("%d\t%s\n",p->number,p->name);
          p = p->next;
-    
-         
     }
 }
 ////链表得添加
@@ -222,8 +220,8 @@ V_NODE *load_link(void)
     FILE *fp;
     int num;
     char na[20];
-    V_NODE *p;
-    V_NODE *head;
+    V_NODE *p = NULL;
+    V_NODE *head = NULL;
     fp = fopen("text","r+");
     if (fp==NULL) 
     {
@@ -252,10 +250,10 @@ V_NODE *load_link(void)
              perror("malloc");
              exit(0);
          }
-         p->number = num;
-         strcpy(p->name,na);
+         p->next->number = num;
+         strcpy(p->next->name,na);
          p->next->next = NULL;
-         p = p->next ;
+         p = p->next;
      }
     return head;
 }
