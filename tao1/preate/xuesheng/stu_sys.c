@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <string.h>
+#include <stdlib.h>
+#include "print_test.c"
 struct node
 {
      int number;
@@ -10,7 +11,9 @@ struct node
     struct node *next;
 
 };
+void print_word();
 typedef struct node V_NODE;
+
 void print_link(V_NODE *p);
 V_NODE *link_add(V_NODE *head);
 V_NODE *delete_link(V_NODE *head);
@@ -23,6 +26,7 @@ int main(int argc, const char *argv[])
 {
     V_NODE *head=NULL;
     char flag=0;
+    print_word();
     head = load_link();
     while(!flag)
     {
