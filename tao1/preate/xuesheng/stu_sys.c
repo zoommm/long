@@ -3,9 +3,9 @@
 #include<stdlib.h>
 struct node
 {
-    int number;
-
-    char name[20];
+     int number;
+     char name[20];
+     int score;
 //在结构体中定义自己得指针；
     struct node *next;
 
@@ -102,7 +102,7 @@ void print_link(V_NODE *p)
 {   
     printf("\n");
     printf("student formation:\n");
-    printf("number\tname\n");
+    printf("number\tname\tscore\n");
     if (p==NULL) 
     {
         printf("no char node\n");
@@ -110,7 +110,7 @@ void print_link(V_NODE *p)
 
     while(p!=NULL)
     {
-         printf("%d\t%s\n",p->number,p->name);
+         printf("%d\t%s\t%d\n",p->number,p->name,p->score);
          p = p->next;
     }
 }
@@ -130,6 +130,8 @@ V_NODE *link_add(V_NODE *head)
     scanf("%d",&p->number);
     printf("input a name:");
     scanf("%s",p->name);
+    printf("input a score:");
+    scanf("%d",&p->score);
     p->next = NULL;
     if (ptr==NULL) 
     {
@@ -208,7 +210,7 @@ void save_link(V_NODE *p)
     }
     while(p!=NULL)
     {
-        fprintf(fp,"%d\t%s\n",p->number,p->name);
+        fprintf(fp,"%d\t%s\t%d\n",p->number,p->name,p->score);
         p=p->next;
     }
 
@@ -219,6 +221,7 @@ V_NODE *load_link(void)
 {
     FILE *fp;
     int num;
+    int sc;
     char na[20];
     V_NODE *p = NULL;
     V_NODE *head = NULL;
@@ -229,7 +232,7 @@ V_NODE *load_link(void)
         exit(0);
 
     }
-    if (fscanf(fp,"%d%s",&num,na)!=EOF ) 
+    if (fscanf(fp,"%d%s%d",&num,na,&sc)!=EOF ) 
     {
         p = malloc(sizeof(V_NODE));
         if (p==NULL) 
@@ -239,10 +242,11 @@ V_NODE *load_link(void)
         }
         p->number = num;
         strcpy(p->name,na);
+        p->score = sc ;
         p->next = NULL;
         head = p ;
     }
-    while(fscanf(fp,"%d%s",&num,na)!=EOF)
+    while(fscanf(fp,"%d%s%d",&num,na,&sc)!=EOF)
     {
         p->next = malloc(sizeof(V_NODE));
         if (p->next==NULL) 
@@ -252,6 +256,7 @@ V_NODE *load_link(void)
          }
          p->next->number = num;
          strcpy(p->next->name,na);
+         p->next->score = sc;
          p->next->next = NULL;
          p = p->next;
      }
