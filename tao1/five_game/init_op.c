@@ -5,6 +5,7 @@
 #include <sys/ioctl.h>
 #include "main.h"
 #include <sys/mman.h>
+
 fbscr_t fb_v;
 
 int init_screen(void)
