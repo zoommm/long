@@ -37,6 +37,8 @@ int init_screen(void)
        perror("map");
        exit(0);
    } 
+   fb_v.memo = p;
+/*   this is a test.for print color.
    int i=0;
    int j=0;
    for (j = 0; j < 550; j++) 
@@ -46,6 +48,12 @@ int init_screen(void)
            p[j*fb_v.w+i]=0x0000ffff;
        }
    }
-   
+*/ 
    return 0;
+}
+int  fb_one_pixel(int x,int y, u32_t color)
+{
+   *((u32_t *)fb_v.memo+x+y*fb_v.w)=color;
+
+    return 0;
 }
