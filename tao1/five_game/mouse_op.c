@@ -26,6 +26,70 @@ static u32_t cursor_pixel[C_W*C_H]=
     T___,T___,T___,T___,T___,BORD,X___,X___,BORD,T___,
     T___,T___,T___,T___,T___,T___,BORD,BORD,T___,T___
 };
+///////////////////////////////////////////////
+static u32_t cursor_winner[C_A*C_B]=
+{
+
+    VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD, 
+    VORD,A___,A___,A___,A___,A___,A___,A___,A___,A___,A___,VORD,
+    VORD,VORD,VORD,VORD,A___,A___,VORD,VORD,VORD,VORD,VORD,VORD,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    VORD,VORD,VORD,VORD,A___,A___,VORD,VORD,VORD,VORD,VORD,VORD,
+    VORD,A___,A___,A___,A___,A___,A___,A___,A___,A___,A___,VORD,
+    VORD,A___,A___,A___,A___,A___,A___,A___,A___,A___,A___,VORD,
+    VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,
+    VORD,VORD,VORD,VORD,A___,A___,VORD,VORD,VORD,VORD,VORD,VORD,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    T___,T___,T___,VORD,A___,A___,VORD,T___,T___,T___,T___,T___,
+    VORD,VORD,VORD,VORD,A___,A___,VORD,VORD,VORD,VORD,VORD,VORD,
+    VORD,A___,A___,A___,A___,A___,A___,A___,A___,A___,A___,VORD,
+    VORD,A___,A___,A___,A___,A___,A___,A___,A___,A___,A___,VORD,
+    VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,VORD,
+};
+///////////////////////////////////
+//
+//
 
 static u32_t bg_save[C_H*C_W] = {0};
 int mx;
@@ -46,6 +110,30 @@ int draw_cursor(int x,int y)
     return 0;
 
 }
+//////////////////////////////////////////////////////////
+int draw_winner(int x,int y)
+{
+    int i= 0;
+    int j= 0;
+    for (j = 0; j < C_A; j++) 
+    {
+        for (i = 0; i < C_B; i++) 
+        {
+            fb_one_pixel(x+i,y+j,cursor_winner[i+j*C_B]);
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////
 int save_bg(int x,int y)
 {
     int i=0;
@@ -92,6 +180,8 @@ int get_m_info(int fd,mouse_event *p)
 int mouse_doing(void)
 {
     int fd;
+    char press_flag = 0;
+    char end_flag = 0;
     mouse_event m_event;
 
     fd = open("/dev/input/mice",O_RDWR|O_NONBLOCK);
@@ -125,8 +215,23 @@ int mouse_doing(void)
 
             switch(m_event.button)
             {
-                case 1: chess_do(); break;
-                case 2: fb_circle(mx,my,13,0x00ffff);break;
+                case 0:if (press_flag==1) 
+                          {
+                            press_flag = 0;
+                            if (end_flag == 0) 
+                            {
+                                end_flag = chess_do();
+                            }
+                            else
+                            {
+                                print_board();
+                                end_flag = 0;
+                            }
+                            
+                          } 
+                          break;
+                case 1: press_flag = 1; break;
+                case 2: chess_do(); break;
                 case 4: break;
                 default : break;
             }

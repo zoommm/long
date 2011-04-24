@@ -5,8 +5,14 @@
 #include <sys/ioctl.h>
 #include "main.h"
 #include <sys/mman.h>
-
+#include <string.h>
+#include <unistd.h>
 fbscr_t fb_v;
+
+extern char chess_board[B_Y*B_X];
+extern char current_player;
+extern u32_t current_color;
+
 
 int init_screen(void)
 {
@@ -39,6 +45,12 @@ int init_screen(void)
        exit(0);
    } 
    fb_v.memo = p;
+   memset(chess_board,0,B_Y*B_X);
+   memset((u32_t *)fb_v.memo,0,fb_v.w*fb_v.h*fb_v.bpp/8);
+   current_player = 1;
+   current_color = BLACK;
+
+   close(fd);
 /*   this is a test.for print color.
    int i=0;
    int j=0;

@@ -7,12 +7,20 @@
 #define  B_Y   24
 #define  SPACE 30
 
-#define  T___  0x00
+#define  YELLOW 0x00eebb00
+#define  BLACK  0x00
+#define  WHITE  0x00ffffff
+
+#define  VORD  0x0000ffff
+#define  V___  0x000000ff
+#define  A___  0x00ff0000
+#define  T___  0x00eebb00
 #define  BORD  0x0f
 #define  X___  0xff00f00f
 #define  C_W   10
 #define  C_H   17
-
+#define  C_A   100
+#define  C_B   100
 
 typedef unsigned int u32_t;
 typedef unsigned char u8_t;
@@ -47,5 +55,8 @@ int save_bg(int x,int y);
 int restore(int x,int y);
 int mouse_doing(void);
 int chess_do(void);
-
+int check_win(void);
+int chess_do(void);
+int draw_winner(int x, int y);
+int check_one(int x, int y);
 #endif
