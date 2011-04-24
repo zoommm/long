@@ -112,12 +112,22 @@ int mouse_doing(void)
             restore(mx,my);
             mx += m_event.dx;
             my += m_event.dy;
-            
+            mx = ((mx < 0) ? 0 : mx);
+            my = ((my < 0) ? 0 : my);
+            if (mx > (fb_v.w-C_W)) 
+            {
+                mx = fb_v.w-C_W;
+            }
+            if (my > (fb_v.h-C_H)) 
+            {
+                my = fb_v.h-C_H;
+            }
+
             switch(m_event.button)
             {
-                case 1:fb_circle(mx,my,13,0x000000ff); break;
-                case 2: break;
-                case 3: break;
+                case 1: chess_do(); break;
+                case 2: fb_circle(mx,my,13,0x00ffff);break;
+                case 4: break;
                 default : break;
             }
             draw_cursor(mx,my);

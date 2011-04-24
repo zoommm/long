@@ -12,8 +12,8 @@ int main(int argc, const char *argv[])
     //fb_line(300,400,300,600,0x0000ff00);        
     //fb_line(400,500,400,700,0x00ffffff);        
     //fb_line(400,500,600,700,0x00ffffff);        
-/*    print_board();
-    save_bg(100,200);
+    print_board();
+/*    save_bg(100,200);
     fb_circle(100,200,13,0x00ffffff);         
     draw_cursor(100,200);
     sleep(1);
@@ -43,6 +43,7 @@ int main(int argc, const char *argv[])
 */
  //fb_one_pixel(i,j,0x0000ff00);
     mouse_doing();
+    
     return 0;
 
 }
