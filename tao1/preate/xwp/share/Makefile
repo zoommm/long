@@ -18,4 +18,4 @@ all:$(obj)
 .PHONY:clean
 clean:
 	rm -rf *.o
-	rm -rf *.so
+	rm -rf $(target)
