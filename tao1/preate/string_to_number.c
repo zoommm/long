@@ -21,7 +21,7 @@ int main(int argc, const char *argv[])
         printf("number=%d\n",number);
     }
 
-    char_change(str);
+    //char_change(str);
 
     printf("\n");
     return 0;
