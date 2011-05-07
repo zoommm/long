@@ -16,34 +16,35 @@ void comp_array(int a[])
 
 int sort_bit(int a[])
 {
-    struct WER_int int b[10];
+    int i = 0;
+    int j = 0;
+    int p;
+    struct WER_int b[10];
     for (i = 0; i < 10; i++) 
     {
         b[i].a = a[i];
     }
-    int p;
-    int j = 0;
-    int i = 0;
+
     for (i = 0; i < 10; i++) 
     {
         for (j = 0; j < 10; j++) 
         {
-            
-        
             if (a[i]&0x1) 
             {
                 p++;
             }
-            a[i]=>>1;
+            a[i]=a[i]>>1;
         }
         b[i].num=p;
         printf("%d\n",b[i].num);
+        p = 0;
     }
-    
+   
+
 }
 int main(int argc, const char *argv[])
 {
-    int a[100]={1,3,9,6,11}
+    int a[100]={1,3,9,6,11,12,22,120};
     sort_bit(a);
     return 0;
 }
