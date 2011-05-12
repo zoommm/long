@@ -77,7 +77,7 @@ void insert_odd(int i)
 {
     int k = 0;
     int tmp;
-    while(((arr[k]%2) != 0) && arr[k]<arr[i])
+    while(arr[k]<arr[i])
         k++;
     tmp = arr[i];
     memmove(&arr[k+1],&arr[k],i-k);
@@ -86,6 +86,12 @@ void insert_odd(int i)
 void insert_even(int i)
 {
     int j;
+    int tmp;
+    while(arr[j]>arr[i])
+        j++;
+    tmp = arr[i];
+    memmove(&arr[i],&arr[i+1],j-i);
+    arr[j] = tmp;
 }
 int main(int argc, const char *argv[])
 {
