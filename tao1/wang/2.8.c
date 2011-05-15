@@ -7,6 +7,7 @@ int main(int argc, const char *argv[])
 {
     int *p;
     int fd = open("hello",O_RDWR);
+    int i = 0;
     if (fd < 0) 
     {
         perror("open hello  ");
@@ -19,7 +20,12 @@ int main(int argc, const char *argv[])
         exit(1);
     }
     close(fd);
-    p[0]=0x30313233;
+    for (i = 0; i < 6; i++) 
+    {
+        
+        p[i]=0x30+i;
+    }
+    //p[0]=0x30313233;
     munmap(p,6);
     return 0;
 }
