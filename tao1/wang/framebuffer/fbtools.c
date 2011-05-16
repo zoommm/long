@@ -31,7 +31,7 @@ int fb_open(PFBDEV pFbdev)
         printf("ioctl FBIOGET_FSCREENINFO\n");
         return FALSE;
     }
-    pFbdev->fb_mem = (unsigned long)(pFbdev->fb_fix.smem_start) &(~PAGE_MASK);
+    pFbdev->fb_mem_offset = (unsigned long)(pFbdev->fb_fix.smem_start) &(~PAGE_MASK);
     pFbdev->fb_mem = (unsigned long int)mmap(NULL,pFbdev->fb_fix.smem_len+pFbdev->fb_mem_offset, PROT_READ|PROT_WRITE,MAP_SHARED,pFbdev->fb,0);
     if (-1L == (long)pFbdev->fb_mem) 
     {

@@ -19,8 +19,8 @@
 #define  X___  0xff00f00f
 #define  C_W   10
 #define  C_H   17
-#define  C_A   100
-#define  C_B   100
+#define  C_A   12
+#define  C_B   56
 
 typedef unsigned int u32_t;
 typedef unsigned char u8_t;
