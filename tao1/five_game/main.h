@@ -14,9 +14,11 @@
 #define  VORD  0x0000ffff
 #define  V___  0x000000ff
 #define  A___  0x00ff0000
-#define  T___  0x00eebb00
+/*#define  T___  0x00eebb00*/
+#define T___ 0x00ff0000
 #define  BORD  0x0f
-#define  X___  0xff00f00f
+/*#define  X___  0xff00f00f*/
+#define X___ 0xff0000ff
 #define  C_W   10
 #define  C_H   17
 #define  C_A   12

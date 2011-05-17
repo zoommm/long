@@ -5,7 +5,7 @@
 #include<fcntl.h>
 
 extern fbscr_t fb_v;
-
+/*
 static u32_t cursor_pixel[C_W*C_H]=
 {
     BORD,T___,T___,T___,T___,T___,T___,T___,T___,T___,
@@ -26,7 +26,28 @@ static u32_t cursor_pixel[C_W*C_H]=
     T___,T___,T___,T___,T___,BORD,X___,X___,BORD,T___,
     T___,T___,T___,T___,T___,T___,BORD,BORD,T___,T___
 };
+*/
 ///////////////////////////////////////////////
+static u32_t cursor_pixel[C_W*C_H]={
+    BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,
+    BORD,T___,T___,T___,T___,T___,T___,T___,T___,BORD,
+    BORD,T___,T___,T___,T___,T___,T___,T___,T___,BORD,
+    BORD,T___,T___,T___,T___,T___,T___,T___,T___,BORD,
+    X___,BORD,T___,T___,T___,T___,T___,T___,BORD,X___,
+    X___,X___,BORD,T___,T___,T___,T___,BORD,X___,X___,
+    X___,X___,X___,BORD,T___,T___,BORD,X___,X___,X___,
+    X___,X___,X___,BORD,T___,T___,BORD,X___,X___,X___,
+    X___,X___,X___,BORD,T___,T___,BORD,X___,X___,X___,
+    X___,X___,X___,BORD,T___,T___,BORD,X___,X___,X___,
+    X___,X___,BORD,T___,T___,T___,T___,BORD,X___,X___,
+    X___,BORD,T___,T___,T___,T___,T___,T___,BORD,X___,
+    BORD,T___,T___,T___,T___,T___,T___,T___,T___,BORD,
+    BORD,T___,T___,T___,T___,T___,T___,T___,T___,BORD,
+    BORD,T___,T___,T___,T___,T___,T___,T___,T___,BORD,
+    BORD,T___,T___,T___,T___,T___,T___,T___,T___,BORD,
+    BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,
+};
+
 static u32_t cursor_winner[C_A*C_B]=
 {
 
