@@ -5,13 +5,13 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "main.h"
-
-
+/*
 #define C_WIDTH 10
 #define C_HEIGHT 17
 #define T___ 0xFFFFFFFF
 #define BORD 0x0
 #define X___ 0xFFFF
+
 static u32_t cursor_pixel[C_WIDTH*C_HEIGHT]={
     BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,
     BORD,T___,T___,T___,T___,T___,T___,T___,T___,BORD,
@@ -31,9 +31,9 @@ static u32_t cursor_pixel[C_WIDTH*C_HEIGHT]={
     BORD,T___,T___,T___,T___,T___,T___,T___,T___,BORD,
     BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,
 };
-
+*/
 static u32_t save_cursor[C_WIDTH*C_HEIGHT];
-int mouse_test(pinfo_t fb)
+int mouse_test(pinfo_t fb)                                              //fb->bpp.and fb->x and fb->y
 {
     int fd;
     if ((fd = mouse_open("/dev/input/mice"))<0) 
@@ -49,19 +49,19 @@ int mouse_test(pinfo_t fb)
     if (write(fd,buf,sizeof(buf)) < sizeof(buf)) 
     {
         fprintf(stderr,"Error write to mice devie:%s\n",strerror(errno));
-        fprintf(stderr,"鼠标将不支持滚轮\n");
+        fprintf(stderr,"鼠标将不支持滚轮\n");            
     }
     while(1)
     {
-        if (mouse_parse(fd,&mevent)==0) 
+        if (mouse_parse(fd,&mevent)==0)                                   // mouse parse jie xi mouse action .. 
         {
             printf("dx=%d\tdy=%d\tdz=%d\t",mevent.dx,mevent.dy,mevent.dz);
-            mouse_restore(fb,m_x,m_y);
+            mouse_restore(fb,m_x,m_y);                                   //restore function...huifu
             m_x +=mevent.dx;
             m_y +=mevent.dy;
-            mouse_draw(fb,m_x,m_y);
+            mouse_draw(fb,m_x,m_y);                                      //chonghua mouse....
             printf("mx=%d\tmy=%d\n",m_x,m_y);
-            switch(mevent.button\n)
+            switch(mevent.button)
             {
                 case 1:
                         printf("left button\n");
@@ -80,7 +80,7 @@ int mouse_test(pinfo_t fb)
             }
         }
         else
-            ;
+            ;                                                            //error read mouse..
     }
     close(fd);
     return 0;
@@ -127,7 +127,7 @@ static int mouse_save(const pinfo_t fb,int x,int y)
 int mouse_draw(const pinfo_t fb,int x,int y)
 {
     int i,j;
-    mouse_save(fb,x,y);
+    mouse_save(fb,x,y);                                     //save mouse draw before do..
     for (j = 0; j < C_HEIGHT; j++) 
     {
         for (i = 0; i < C_WIDTH; i++) 
@@ -154,6 +154,10 @@ int  mouse_restore(const pinfo_t fb,int x,int y)
 }
 int main(int argc, const char *argv[])
 {
-    
+    printf("1\n");
+    mouse_open();
+    printf("2\n");
+    mouse_test();
+    printf("3\n");
     return 0;
 }
