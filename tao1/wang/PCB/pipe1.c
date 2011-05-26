@@ -24,17 +24,15 @@ int main(int argc, const char *argv[])
     }
     if (pid == 0) 
     {
-        close(fd[0]);
         write(fd[1],"hello world!\n",13);
         wait(NULL);
     }
     else if(pid > 0)
     {
-        close(fd[1]);
         n = read(fd[0],line,MAXLINE);
         write(STDOUT_FILENO,line,n);
     }
-    //////////////////////////////////
+/*    //////////////////////////////////
     if (pipe(fd1)<0) 
     {
         perror("pipe");
@@ -57,7 +55,7 @@ int main(int argc, const char *argv[])
         n = read(fd1[0],line,MAXLINE);
         write(STDOUT_FILENO,line,n);
     }
-    
+*/    
     
     return 0;
 }

@@ -23,21 +23,26 @@ int main(int argc, const char *argv[])
     }
     if (pid >0 ) 
     {
-        close(fd[0]);
-        while(1)
-        {
-            write(fd[1],"hello world!\n",13);
-            printf("i = %d\n",i);
-            i++;
-        }
+        close(fd[1]);
+        //while(1)
+        //{
+        //write(fd[1],"hello world!\n",13);
+        //printf("i = %d\n",i);
+        //i++;
+        //}
+        n = read(fd[0],line,MAXLINE);
+        printf("%d\n",n);
+        n = read(fd[0],line,MAXLINE);
+        printf("%d\n",n);
+
         wait(NULL);
     }
     else
     {
-        close(fd[1]);
+        close(fd[0]);
         //n = read(fd[0],line,MAXLINE);
         //write(STDOUT_FILENO,line,n);
-        while(1);
+        //while(1);
     }
     return 0;
 }
