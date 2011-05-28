@@ -41,7 +41,8 @@ void drop(int me)
 void *philosophy(void *arg)
 {
 	int me = (int)arg;
-	
+	int count = 0;
+
 	while(1)
 	{
 		printf("%d is thinking...\n", me);
@@ -50,6 +51,8 @@ void *philosophy(void *arg)
 		printf("%d is eating...\n", me);
 		usleep(rand()%10);
 		drop(me);
+        count++;
+        printf("count = %d\n",count);
 	}
 }
 

@@ -37,14 +37,17 @@ void drop(int me)
 void *philosophy(void *arg)
 {
     int me = (int)arg;
+    int count = 0;
     while(1)
     {
         printf("%d is thinking\n",me);
-        sleep(rand()%10);
+        usleep(rand()%10);
         pickup(me);
         printf("%d is eating\n",me);
-        sleep(rand()%10);
+        usleep(rand()%10);
         drop(me);
+        count++;
+        printf("count:%d\n",count);
     }
 
 }
@@ -61,11 +64,11 @@ int main(int argc, const char *argv[])
    {
        p[i] = i;
    }
-   for (i = 0; i < N; i++) 
+   for (i = 0; i < N-1; i++) 
    {
-       pthread_create(&tid[i],NULL,philosopy,p[i]);
+       pthread_create(&tid[i],NULL,philosophy,(void *)p[i]);
    }
-   philosopy(N-1);
+   philosophy((void *)(N-1));
    for (i = 0; i < N-1; i++) 
    {
        pthread_join(tid[i],NULL);
