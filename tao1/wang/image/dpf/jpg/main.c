@@ -18,14 +18,13 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	
-	    display_jpeg(argv[1], fb_inf);
-        display_jpeg(argv[2], fb_inf);    
-	
+        display_jpeg(argv[1], fb_inf);
+        display_jpeg1(argv[2], fb_inf);    
 #if 1 
 	/* Test mouse */
-	//test_mouse(fb_inf);
+    test_mouse(fb_inf);
 
-	if (init_ft("simkai.ttf", 0) != 0){
+	if (init_ft("mao.ttf", 0) != 0){
 		fprintf(stderr, "Error initial font\n")	;
 		return 1;
 	}

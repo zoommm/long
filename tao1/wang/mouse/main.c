@@ -5,7 +5,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "main.h"
-/*
 #define C_WIDTH 10
 #define C_HEIGHT 17
 #define T___ 0xFFFFFFFF
@@ -31,7 +30,7 @@ static u32_t cursor_pixel[C_WIDTH*C_HEIGHT]={
     BORD,T___,T___,T___,T___,T___,T___,T___,T___,BORD,
     BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,
 };
-*/
+
 static u32_t save_cursor[C_WIDTH*C_HEIGHT];
 int mouse_test(pinfo_t fb)                                              //fb->bpp.and fb->x and fb->y
 {

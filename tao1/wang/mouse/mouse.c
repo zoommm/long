@@ -1,4 +1,5 @@
 #include "mouse.h"
+#include <stdlib.h>
 
 static u32_t save_cursor[C_WIDTH*C_HEIGHT];
 
@@ -20,11 +21,16 @@ int mouse_test(pinfo_t fb)
         fprintf(stderr,"Error write to mice devie:%s\n",strerror(errno));
         fprintf(stderr,"bu zhi chi ");
     }
+    //fb_line(&fb,400,300,600,300,0x00ffff00);
+    //fb_line(&fb,400,300,400,600,0x00ffff00);
+    //fb_line(&fb,400,600,600,600,0x00ffff00);
+    //fb_line(&fb,600,300,600,600,0x00ffff00);
     while(1)
     {
+        mevent.button = 0;
         if (mouse_parse(fd,&mevent)==0) 
         {
-            printf("dx=%d\tdy=%d\tdz=%d\t",mevent.dx,mevent.dy,mevent.dz);
+            //printf("dx=%d\tdy=%d\tdz=%d\t",mevent.dx,mevent.dy,mevent.dz);
         
         mouse_restore(fb,m_x,m_y);
         m_x +=mevent.dx;
@@ -34,16 +40,24 @@ int mouse_test(pinfo_t fb)
         switch(mevent.button)
         {
             case 1:
-                    printf("left button\n");
+                    //printf("left button\n");
+                    if (m_x < 450 && m_x > 400) 
+                    {
+                        if (m_y < 350 && m_y > 300) 
+                        {
+                            exit(1);
+                        }
+                    }
+
                     break;
             case 2:
-                    printf("right button\n");
+                    //printf("right button\n");
                     break;
             case 4:
-                    printf("middle button\n");
+                    //printf("middle button\n");
                     break;
             case 0:
-                    printf("no button\n");
+                    //printf("no button\n");
                     break;
             default:
                     break;
@@ -163,18 +177,89 @@ int mouse_restore(const pinfo_t fb,int x, int y)
     }
     return 0;
 }
+void swap(int *p,int *q)
+{
+    int tmp;
+    tmp = *p;
+    *p = *q;
+    *q = tmp;
+    
+}
+int fb_line(const pinfo_t fb,int x1, int y1,int x2,int y2,u32_t color)
+{
+    int dx = x2 - x1;
+    int dy = y2 - y1;
+    int p;
+    int inc;
+    inc = ((dx*dy)>=0)?1:-1;
+    if (abs(dx)>abs(dy)) 
+    {
+        if (dx < 0) 
+        {
+            swap(&x1,&x2);
+            dx = -dx;
+            dy = -dy;
+        }
+        dy = (dy>0)?dy:-dy;
+        p = 2*dy-dx;
+        while(x1++ <= x2)
+        {
+            fb_drawpixel(fb,x1-1,y1,color);
+            if (p < 0) 
+            {
+                p += 2*dy;
+            }
+            else
+            {
+                y1 += inc;
+                p += 2*(dy - dx);
+
+            }
+        }
+    }
+    else
+    {
+        if (dy < 0) 
+        {
+            swap(&x1,&x2);
+            dx = -dx;
+            dy = -dy;
+        }
+        dx = (dx >0)? dx:-dx;
+        p = 2*dx-dy;
+        while(y1++<y2)
+        {
+            fb_drawpixel(fb,x1,y1-1,color);
+            if (p < 0) 
+            {
+                p += 2*dx;
+            }
+            else
+            {
+                x1 += inc;
+                p +=2 * (dx-dy);
+            }
+        }
+    }
+    return 0;
+}
 int main(int argc, const char *argv[])
 {
     info_t fb;
     fb_init(&fb);
+    fb_line(&fb,400,300,450,300,0x00ffff00);
+    fb_line(&fb,400,300,400,350,0x00ffff00);
+    fb_line(&fb,400,350,450,350,0x00ffff00);
+    fb_line(&fb,450,300,450,350,0x00ffff00);
 
     mouse_test(&fb); 
-    fb_drawpixel(fb,300,500,0x0000ff);
-    fb_drawpixel(fb,301,500,0x0000ff);
-    fb_drawpixel(fb,302,500,0x0000ff);
-    fb_drawpixel(fb,303,500,0x0000ff);
-    fb_drawpixel(fb,304,500,0x0000ff);
-    fb_drawpixel(fb,305,500,0x0000ff);
+    //fb_drawpixel(&fb,300,500,0x00ff00);
+    //fb_drawpixel(&fb,301,500,0x0000ff);
+    //fb_drawpixel(&fb,302,500,0x00ff00);
+    //fb_drawpixel(&fb,303,500,0x0000ff);
+    //fb_drawpixel(&fb,304,500,0x00ff00);
+    //fb_drawpixel(&fb,305,500,0x0000ff);
+
     fb_close(&fb);
     return 0;
 }

@@ -14,12 +14,13 @@ int mouse_test(pinfo_t fb)
     int m_x = fb->w/2;
     int m_y = fb->h/2;
     mouse_draw(fb,m_x,m_y);
-/*    u8_t buf[]={0xF3,0xC8,0xF3,0x064,0xF3,0x50};
+    u8_t buf[]={0xF3,0xC8,0xF3,0x064,0xF3,0x50};
     if (write(fd,buf,sizeof(buf))<sizeof(buf))
     {
         fprintf(stderr,"Error write to mice devie:%s\n",strerror(errno));
         fprintf(stderr,"bu zhi chi ");
     }
+
     while(1)
     {
         if (mouse_parse(fd,&mevent)==0) 
@@ -30,7 +31,9 @@ int mouse_test(pinfo_t fb)
         m_x +=mevent.dx;
         m_y +=mevent.dy;
         mouse_draw(fb,m_x,m_y);
+       
         printf("mx=%d\tmy=%d\n",m_x,m_y);
+  
         switch(mevent.button)
         {
             case 1:
@@ -51,8 +54,9 @@ int mouse_test(pinfo_t fb)
         }
         else
             ;
+
     }
-*/
+
     close(fd);
     return 0;
 }
@@ -105,7 +109,7 @@ int mouse_open(const char *mdev)
     }
     return (open(mdev,O_RDWR | O_NONBLOCK));
 }
-#if 0
+#if 1
 int mouse_parse(int fd,mevent_t *mevent)
 {
     s8_t buf[READ_MOUSE];
@@ -125,7 +129,7 @@ int mouse_parse(int fd,mevent_t *mevent)
     return 0;
 }
 #endif
-/*
+
 static int mouse_save(const pinfo_t fb,int x,int y)
 {
     int i,j;
@@ -138,11 +142,11 @@ static int mouse_save(const pinfo_t fb,int x,int y)
     }
     return 0;
 }
-*/
+
 int mouse_draw(const pinfo_t fb,int x, int y)
 {
     int i,j;
-    //mouse_save(fb,x,y);
+    mouse_save(fb,x,y);
     for (j = 0; j < C_HEIGHT; j++) 
     {
         for (i = 0; i < C_WIDTH; i++) 
@@ -155,7 +159,7 @@ int mouse_draw(const pinfo_t fb,int x, int y)
     }
     return 0;
 }
-/*int mouse_restore(const pinfo_t fb,int x, int y)
+int mouse_restore(const pinfo_t fb,int x, int y)
 {
     int i,j;
     for (j = 0; j < C_HEIGHT; j++) 
@@ -167,19 +171,19 @@ int mouse_draw(const pinfo_t fb,int x, int y)
     }
     return 0;
 }
-*/
+
 int main(int argc, const char *argv[])
 {
     info_t fb;
     fb_init(&fb);
 
     mouse_test(&fb); 
-    //fb_drawpixel(fb,300,500,0x0000ff);
-    //fb_drawpixel(fb,301,500,0x0000ff);
-    //fb_drawpixel(fb,302,500,0x0000ff);
-    //fb_drawpixel(fb,303,500,0x0000ff);
-    //fb_drawpixel(fb,304,500,0x0000ff);
-    //fb_drawpixel(fb,305,500,0x0000ff);
+    fb_drawpixel(fb,300,500,0x0000ff);
+    fb_drawpixel(fb,301,500,0x0000ff);
+    fb_drawpixel(fb,302,500,0x0000ff);
+    fb_drawpixel(fb,303,500,0x0000ff);
+    fb_drawpixel(fb,304,500,0x0000ff);
+    fb_drawpixel(fb,305,500,0x0000ff);
     fb_close(&fb);
     return 0;
 }
