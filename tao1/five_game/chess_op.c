@@ -83,7 +83,7 @@ int chess_do(void)
         }
         //printf("Player %d won !\n",winner);
         return winner;
-    }
+  }
      return 0;
 }
 int check_win(void)

@@ -1,4 +1,3 @@
-#if 0
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -8,11 +7,7 @@
 #include <stdlib.h>
 #include <sys/mman.h>
 #include <sys/ioctl.h>
-#endif
-
 #include "main.h"
-
-#if 0
 
 #define C_WIDTH  13
 #define C_HEIGHT 17
@@ -36,7 +31,6 @@
 #define x_quit_r	200	/*退出X右*/
 #define y_quit_l	450	/*退出Y左*/
 #define y_quit_r	500	/*退出Y右*/
-
 
 
 
@@ -66,7 +60,6 @@ static unsigned long pic_save_cursor[D_X * D_Y];
 typedef unsigned int u32_t;
 typedef unsigned short u16_t;
 typedef unsigned char u8_t;
-
 typedef struct
 {
 	int fd;
@@ -84,8 +77,7 @@ typedef struct
 	int dz;
 	int button;
 }mevent_t;
-
-#endif
+		;            
 void fb_pixel(pfb_info_t pfb, int x, int y, u32_t color)
 {
 	u32_t *p = (u32_t *)pfb->fb_mem + x + y*pfb->w;
