@@ -7,17 +7,34 @@
 #include <stdlib.h>
 #include <sys/mman.h>
 #include <sys/ioctl.h>
+//#include "main.h"
+
 #define C_WIDTH  13
 #define C_HEIGHT 17
+#define D_X	 100
+#define D_Y	 50
 #define T___     0XFFFFFFFF
 #define BORD     0x0
 #define X___     0xFFFF
-#define x_l	500
-#define x_r	600
-#define y_l	300
-#define y_r	330
 
-static unsigned long load_cursor_pixel[C_WIDTH * C_HEIGHT] = {
+#define x_start_l	100	/*开始X左*/
+#define x_start_r	200	/*开始X右*/
+#define y_start_l	150	/*开始Y左*/
+#define y_start_r	200	/*开始Y右*/
+
+#define x_list_l	100	/*列表X左*/
+#define x_list_r	200	/*列表X右*/
+#define y_list_l	300	/*列表Y左*/
+#define y_list_r	350	/*列表Y右*/
+
+#define x_quit_l	100	/*退出X左*/
+#define x_quit_r	200	/*退出X右*/
+#define y_quit_l	450	/*退出Y左*/
+#define y_quit_r	500	/*退出Y右*/
+
+
+
+static unsigned long cursor_pixel[C_WIDTH * C_HEIGHT] = {
     	BORD,T___,T___,T___,T___,T___,T___,T___,T___,T___,T___,T___,T___,
     	BORD,BORD,T___,T___,T___,T___,T___,T___,T___,T___,T___,T___,T___,
     	BORD,X___,BORD,T___,T___,T___,T___,T___,T___,T___,T___,T___,T___,
@@ -34,49 +51,11 @@ static unsigned long load_cursor_pixel[C_WIDTH * C_HEIGHT] = {
     	BORD,X___,BORD,X___,BORD,T___,T___,T___,T___,T___,T___,T___,T___,
     	BORD,X___,X___,BORD,T___,T___,T___,T___,T___,T___,T___,T___,T___,
     	BORD,X___,BORD,T___,T___,T___,T___,T___,T___,T___,T___,T___,T___,
-    	BORD,BORD,T___,T___,T___,T___,T___,T___,T___,T___,T___,T___,T___,
+    	BORD,BORD,T___,T___,T___,T___,T___,T___,T___,T___,T___,T___,T___
 };
-/*
-static unsigned long load_cursor_pixel[C_WIDTH * C_HEIGHT] = {
-    	BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,
-    	BORD,X___,X___,X___,X___,X___,X___,X___,X___,BORD,
-    	BORD,X___,X___,X___,X___,X___,X___,X___,X___,BORD,
-    	BORD,X___,X___,X___,X___,X___,X___,X___,X___,BORD,
-    	T___,BORD,X___,X___,X___,X___,X___,X___,BORD,T___,
-    	T___,T___,BORD,X___,X___,X___,X___,BORD,T___,T___,
-    	T___,T___,T___,BORD,X___,X___,BORD,T___,T___,T___,
-    	T___,T___,T___,BORD,X___,X___,BORD,T___,T___,T___,
-    	T___,T___,T___,BORD,X___,X___,BORD,T___,T___,T___,
-    	T___,T___,T___,BORD,X___,X___,BORD,T___,T___,T___,
-    	T___,T___,BORD,X___,X___,X___,X___,BORD,T___,T___,
-    	T___,BORD,X___,X___,X___,X___,X___,X___,BORD,T___,
-    	BORD,X___,X___,X___,X___,X___,X___,X___,X___,BORD,
-    	BORD,X___,X___,X___,X___,X___,X___,X___,X___,BORD,
-    	BORD,X___,X___,X___,X___,X___,X___,X___,X___,BORD,
-    	BORD,X___,X___,X___,X___,X___,X___,X___,X___,BORD,
-    	BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,BORD,
-};
-*/
-static unsigned long take_cursor_pixel[C_WIDTH * C_HEIGHT] = {
-	BORD, T___, T___, T___, T___, T___, T___, T___, T___, T___,T___, T___, T___,
-	BORD, BORD, T___, T___, T___, T___, T___, T___, T___, T___,T___, T___, T___,
-	BORD, X___, BORD, T___, T___, T___, T___, T___, T___, T___,T___, T___, T___,
-	BORD, X___, X___, BORD, T___, T___, T___, T___, T___, T___,T___, T___, T___,
-	BORD, X___, X___, X___, BORD, T___, T___, T___, T___, T___,T___, T___, T___,
-	BORD, X___, X___, X___, X___, BORD, T___, T___, T___, T___,T___, T___, T___,
-	BORD, X___, X___, X___, X___, X___, BORD, T___, T___, T___,T___, T___, T___,
-	BORD, X___, X___, X___, X___, X___, X___, BORD, T___, T___,T___, T___, T___,
-	BORD, X___, X___, X___, X___, X___, X___, X___, BORD, T___,T___, T___, T___,
-	BORD, X___, X___, X___, X___, X___, X___, X___, X___, BORD,T___, T___, T___,
-	BORD, X___, X___, X___, X___, X___, BORD, BORD, BORD, BORD,T___, T___, T___,
-	BORD, X___, X___, BORD, X___, X___, BORD, T___, T___, T___,T___, T___, T___,
-	BORD, X___, BORD, T___, BORD, X___, X___, BORD, T___, T___,T___, T___, T___,
-	BORD, BORD, T___, T___, BORD, X___, X___, BORD, T___, T___,T___, T___, T___,
-	T___, T___, T___, T___, T___, BORD, X___, X___, BORD, T___,T___, T___, T___,
-	T___, T___, T___, T___, T___, BORD, X___, X___, BORD, T___,T___, T___, T___,
-	T___, T___, T___, T___, T___, T___, BORD, BORD, T___, T___,T___, T___, T___,
-};
-static unsigned long save_cursor[C_WIDTH * C_HEIGHT];
+
+static unsigned long mouse_save_cursor[C_WIDTH * C_HEIGHT];
+static unsigned long pic_save_cursor[D_X * D_Y];
 
 typedef unsigned int u32_t;
 typedef unsigned short u16_t;
@@ -98,7 +77,7 @@ typedef struct
 	int dz;
 	int button;
 }mevent_t;
-
+		;            
 void fb_pixel(pfb_info_t pfb, int x, int y, u32_t color)
 {
 	u32_t *p = (u32_t *)pfb->fb_mem + x + y*pfb->w;
@@ -107,12 +86,69 @@ void fb_pixel(pfb_info_t pfb, int x, int y, u32_t color)
 	return ;
 }
 
-void put(pfb_info_t pfb, u32_t color)
+void put_s(pfb_info_t pfb, u32_t color)
 {
 	int i, j;
-	for(i = x_l; i < x_r; i++)
+	for(i = x_start_l; i < x_start_r; i++)
 	{
-		for(j = y_l; j < y_r; j++)
+		for(j = y_start_l; j < y_start_r; j++)
+		{
+			fb_pixel(pfb, i, j, color);
+		}
+	}
+}
+void put_l(pfb_info_t pfb, u32_t color)
+{
+	int i, j;
+	for(i = x_list_l; i < x_list_r; i++)
+	{
+		for(j = y_list_l; j < y_list_r; j++)
+		{
+			fb_pixel(pfb, i, j, color);
+		}
+	}
+}
+void put_q(pfb_info_t pfb, u32_t color)
+{
+	int i, j;
+	for(i = x_quit_l; i < x_quit_r; i++)
+	{
+		for(j = y_quit_l; j < y_quit_r; j++)
+		{
+			fb_pixel(pfb, i, j, color);
+		}
+	}
+}
+void put1(pfb_info_t pfb, u32_t color)
+{
+	int i, j;
+	for(i = x_start_l; i < x_start_r; i = i + 3)
+	{
+		for(j = y_start_l; j < y_start_r; j = j + 3)
+		{
+			fb_pixel(pfb, i, j, color);
+		}
+	}
+}
+
+void put2(pfb_info_t pfb, u32_t color)
+{
+	int i, j;
+	for(i = x_list_l; i < x_list_r; i = i + 3)
+	{
+		for(j = y_list_l; j < y_list_r; j = j + 3)
+		{
+			fb_pixel(pfb, i, j, color);
+		}
+	}
+}
+
+void put3(pfb_info_t pfb, u32_t color)
+{
+	int i, j;
+	for(i = x_quit_l; i < x_quit_r; i = i + 3)
+	{
+		for(j = y_quit_l; j < y_quit_r; j = j + 3)
 		{
 			fb_pixel(pfb, i, j, color);
 		}
@@ -125,7 +161,7 @@ void mouse_save(pfb_info_t pfb, int x, int y)
 	
 	for(j = 0; j < C_HEIGHT; j++)
 		for(i = 0; i < C_WIDTH; i++)
-			save_cursor[i+j*C_WIDTH] = 
+			mouse_save_cursor[i+j*C_WIDTH] = 
 		*((u32_t *)pfb->fb_mem + (x+i) +(y+j)*pfb->w);
 	return;
 }
@@ -136,34 +172,42 @@ void mouse_restore(pfb_info_t pfb, int x, int y)
 	
 	for(j = 0; j < C_HEIGHT; j++)
 		for(i = 0; i < C_WIDTH; i++)
-			fb_pixel(pfb, x+i, y+j, save_cursor[i+j*C_WIDTH]); 
+			fb_pixel(pfb, x+i, y+j, mouse_save_cursor[i+j*C_WIDTH]); 
 	return;
 }
 
-void mouse_draw_take(pfb_info_t pfb, int x, int y)
+int pic_save(pfb_info_t pfb, int x, int y)
 {
 	int i, j;
-
-	for(i = 0;i < C_WIDTH; i++)
-		for(j = 0;j < C_HEIGHT; j++)
-		{
-			if(take_cursor_pixel[i+j*C_WIDTH] != T___)
-			{
-				fb_pixel(pfb, x+i, y+j, take_cursor_pixel[i+j*C_WIDTH]);
-			}
-		}
+	
+	for(j = 0; j < D_Y; j++)
+		for(i = 0; i < D_X; i++)
+			pic_save_cursor[i+j*D_X] = 
+		*((u32_t *)pfb->fb_mem + (x+i) +(y+j)*pfb->w);
+	return 1;
 }
 
-void mouse_draw_load(pfb_info_t pfb, int x, int y)
+void pic_restore(pfb_info_t pfb, int x, int y)
+{
+	int i, j;
+	
+	for(j = 0; j < D_Y; j++)
+		for(i = 0; i < D_X; i++)
+			fb_pixel(pfb, x+i, y+j, pic_save_cursor[i+j*D_X]); 
+	return;
+}
+
+
+void mouse_draw(pfb_info_t pfb, int x, int y)
 {
 	int i, j;
 
 	for(i = 0;i < C_WIDTH; i++)
 		for(j = 0;j < C_HEIGHT; j++)
 		{
-			if(load_cursor_pixel[i+j*C_WIDTH] != T___)
+			if(cursor_pixel[i+j*C_WIDTH] != T___)
 			{
-				fb_pixel(pfb, x+i, y+j, load_cursor_pixel[i+j*C_WIDTH]);
+				fb_pixel(pfb, x+i, y+j, cursor_pixel[i+j*C_WIDTH]);
 			}
 		}
 }
@@ -189,11 +233,15 @@ int main()
 {
 	fb_info_t fb;
 	mevent_t mevent;
-	mevent.button = 0;
-
+	
 	int fd, mfd;
 
 	int m_x, m_y;
+
+	int s = 0;
+	int l = 0;
+	int q = 0;
+
 	if((fd = open("/dev/fb0", O_RDWR)) < 0)
 	{
 		perror("open /dev/fb0 error:");
@@ -217,13 +265,13 @@ int main()
 
 	m_x = fb.w / 2;
 	m_y = fb.h / 2;
-
-	put(&fb, 0xffff00);
+	put_s(&fb, 0XFF);
+	put_l(&fb, 0XFF);
+	put_q(&fb, 0XFF);
 	//Step 1	
 	mouse_save(&fb, m_x, m_y);
-
 	//Step 2
-	mouse_draw_take(&fb, m_x, m_y);
+	mouse_draw(&fb, m_x, m_y);
 
 	mfd = open("/dev/input/mice", O_RDWR | O_NONBLOCK);
 	if(mfd < 0)
@@ -235,7 +283,6 @@ int main()
 
 	while(1)
 	{
-            mevent.button = 0;
 		if(mouse_parse(mfd, &mevent) == 0)
 		{
 			//Step 3
@@ -252,24 +299,58 @@ int main()
 				m_y = 0;
 			if(m_y > (fb.h-C_HEIGHT-1))
 				m_y = fb.h-C_HEIGHT-1;
-			if((m_x > x_l)&&(m_x < x_r)&&(m_y > y_l)&&(m_y < y_r))
+			if((m_x > x_start_l)&&(m_x < x_start_r)&&(m_y > y_start_l)&&(m_y < y_start_r))
 			{
-				mouse_save(&fb, m_x, m_y);
-                mouse_draw_load(&fb, m_x, m_y);
-				
+				if(s == 0)
+					s = pic_save(&fb, x_start_l, y_start_l);
+				put1(&fb,0xFFFFFFFF);
 				if(mevent.button == 1)
-                printf("111111\n");
-                    //exit(1);
+				{
+				/*开始*/
+				printf("star\n");
+			//	exit(1);
+				}
 			}
-			//Step 4
-            else
-            {
-			    mouse_save(&fb, m_x, m_y);
+			else if((m_x > x_list_l)&&(m_x < x_list_r)&&(m_y > y_list_l)&&(m_y < y_list_r))
+			{
+				if(l == 0)
+					l = pic_save(&fb, x_list_l, y_list_l);
 
-			//Step 5	
-			    mouse_draw_take(&fb, m_x, m_y);
-            }
-			printf("mevent = %d\n",mevent.button);	
+				put2(&fb,0xFFFFFFFF);
+				if(mevent.button == 1)
+				{
+				/*列表*/
+				printf("list\n");
+			//	exit(1);
+				}	
+			}
+			else if((m_x > x_quit_l)&&(m_x < x_quit_r)&&(m_y > y_quit_l)&&(m_y < y_quit_r))
+			{
+				if(q == 0)
+					q = pic_save(&fb, x_quit_l, y_quit_l);
+
+				put3(&fb,0xFFFFFFFF);
+				if(mevent.button == 1)
+				{
+				/*退出*/
+				printf("exit\n");
+			//	exit(1);
+				}
+			}
+			else
+			{
+	
+				if(s == 1)
+					pic_restore(&fb, x_start_l, y_start_l);
+				if(l == 1)
+					pic_restore(&fb, x_list_l, y_list_l);
+				if(q == 1)
+					pic_restore(&fb, x_quit_l, y_quit_l);
+            }				
+
+			mouse_save(&fb, m_x, m_y);	
+			mouse_draw(&fb, m_x, m_y);
+			
 		}
 	}
 	close(fb.fd);
