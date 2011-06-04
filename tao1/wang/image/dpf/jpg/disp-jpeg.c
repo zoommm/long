@@ -101,6 +101,7 @@ int display_jpeg(char *filename, fb_info fb_inf)
 	
 	return 0;
 }
+#if 1
 int display_jpeg1(char *filename, fb_info fb_inf)
 {
 
@@ -135,7 +136,7 @@ int display_jpeg1(char *filename, fb_info fb_inf)
     }
 */
 ////////////leftup to rightdown/////////
-/*
+
     int i,j;
     for (i = 0; i < new_jpeg.h; i+=1) 
     {
@@ -159,8 +160,8 @@ int display_jpeg1(char *filename, fb_info fb_inf)
         }
         usleep(1000);
     }
-*///////////////////////////////////////////////
-    
+///////////////////////////////////////////////
+/*    
     int i,j;
    for (i = 0; i < new_jpeg.w/2+1;i++) 
     {
@@ -174,6 +175,7 @@ int display_jpeg1(char *filename, fb_info fb_inf)
         }
         usleep(1000);
     }
+*/
  /*
     for (i = new_jpeg.w/2;i < new_jpeg.w;i++) 
     {
@@ -194,3 +196,5 @@ int display_jpeg1(char *filename, fb_info fb_inf)
 	free(buf32);
     return 0;
 }
+
+ #endif

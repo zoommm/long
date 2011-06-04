@@ -75,8 +75,8 @@ int test_mouse(fb_info fb_inf)
 		if (n != -1){
 			
 			mouse_parse(buf,&mevent);
-			printf("dx:%d\tdy:%d\n", mevent.x, mevent.y);
-			printf("mx:%d\tmy:%d\n", m_x, m_y);
+            //printf("dx:%d\tdy:%d\n", mevent.x, mevent.y);
+            //printf("mx:%d\tmy:%d\n", m_x, m_y);
 
 			fb_restorecursor(fb_inf, m_x, m_y);
 		
@@ -86,13 +86,13 @@ int test_mouse(fb_info fb_inf)
 
 			switch (mevent.button){
 			case 1:
-				printf("left\n");
+                //printf("left\n");
 				break;
 			case 2:
-				printf("right\n");
+                //printf("right\n");
 				break;
 			case 3:
-				printf("middle\n");
+                //printf("middle\n");
 				break;
 			default:
 				break;
