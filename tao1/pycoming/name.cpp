@@ -1,13 +1,16 @@
 #include <iostream>
 #include <cstring>
-using namespace std;
+//////////2/////////
+//using namespace std;
 
 namespace my
 {
     char name[]="wangjianli";
     void show_name()
     {
-        cout<<name<<endl;
+       /////////////2/////
+       std::cout<<name<<endl;
+       //cout<<name<<endl;
     }
 }
 namespace your
@@ -15,7 +18,9 @@ namespace your
     char name[]="pycoming";
     void show_name()
     {
-        cout<<name<<endl;
+        //////////2//////////
+        std::cout<<name<<endl;
+        //cout<<name<<endl;
     }
 }
 ////1/////////
