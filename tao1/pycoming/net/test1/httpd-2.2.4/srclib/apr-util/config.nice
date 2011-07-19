@@ -1,0 +1,15 @@
+#! /bin/sh
+#
+# Created by configure
+
+"/home/xwp/tao1/pycoming/net/test1/httpd-2.2.4/srclib/apr-util/configure" \
+"-prefix=/var/httpd/" \
+"--cache-file=/dev/null" \
+"--srcdir=/home/xwp/tao1/pycoming/net/test1/httpd-2.2.4/srclib/apr-util" \
+"--with-apr=../apr" \
+"--prefix=/var/httpd/" \
+"--exec-prefix=/var/httpd/" \
+"--libdir=/var/httpd//lib" \
+"--includedir=/var/httpd//include" \
+"--bindir=/var/httpd//bin" \
+"$@"

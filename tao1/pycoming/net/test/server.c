@@ -43,7 +43,7 @@ int main(void)
         else if(n == 0)
         {
             close(listenfd);
-                fd = open("test","a+");
+                fd = open("test","w+");
                 if (fd < 0) 
                 {
                     perror("open fail");
