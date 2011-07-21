@@ -1,0 +1,60 @@
+#ifnedf UI_MYDIALOG_H
+#define UI_MYDIALOG_H
+
+#include<QtCore/QVariant>
+#include<QtGui/QAction>
+#include<QtGui/QApplication>
+#include<QtGui/QButoonGroup>
+#include<QtGui/QDialog>
+#include<QtGui/QGridLayout>
+#include<QtGui/QLineEdit>
+#include<QtGui/QPushButton>
+#include<QtGui/QTextBrowser>
+
+class Ui_MyDialog
+{
+public:
+        QGridLayout *gridLayout;
+        QTextBrowser *textBrowser;
+        QLineEdit *lineEdit;
+        QPushButton *pushButton;
+        
+        void setupUi(QDialog *MyDialog)
+        {
+        if(MyDialog->objectName().isEmpty())
+            MyDialog->setObjectName(QString::fromUtf8("MyDialog"));
+        QSize size(328,217);
+        size = size.expandedTo(MyDialog->minimumSizeHint());
+        MyDialog->resize(size);
+        gridLayout = new QGridLayout(MyDialog);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        textBrowser = new QTextBrowser(MyDialog);
+        textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
+
+        gridLayout->addWidget(textBrowser,0,0,1,2);
+        lineEdit = new QLineEdit(MyDialog);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        gridLayout->addWidget(lineEdit,1,0,1,1);
+        pushButton = new QPushButton(MyDialog);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        gridLayout->addWidget(pushButton,1,1,1,1);
+        retranslateUi(MyDialog);
+        QMetaObject::connectSlotsByName(MyDialog);
+
+        }
+        void retranslateUi(QDialog *MyDialog)
+        {
+        MyDialog->setWindowTitle(QApplication::translate("MyDialog","My Dialog",0,QApplication::UnicodeUTF8));
+        pushButton->setText(QApplication::translate("MyDialog","Enter",0,QApplication::UnicodeUTF8));
+        Q_UNUSED(MyDilog);
+
+        }
+
+};
+
+namespace Ui{
+    class MyDialog:public Ui_MyDialog{};
+
+}
+#endif 
