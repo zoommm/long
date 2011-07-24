@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mydialog.h'
 **
-** Created: Fri Jul 22 20:21:13 2011
+** Created: Sun Jul 24 15:16:40 2011
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.3)
 **
 ** WARNING! All changes made in this file will be lost!
